@@ -715,3 +715,49 @@ button {
     position: absolute;
     animation: float-title-heart 3s forwards;
 }
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s infinite linear;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.progress-container {
+    width: 100%;
+    margin-top: 15px;
+    text-align: left;
+}
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    border-radius: 5px;
+    transition: width 0.2s ease;
+}
+
+.progress-status {
+    font-size: 12px;
+    color: #666;
+    text-align: left;
+}
+
+.progress-percent {
+    font-weight: bold;
+}
