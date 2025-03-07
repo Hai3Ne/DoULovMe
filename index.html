@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do you love me???</title>
+    <title>Chúc mừng 8/3 - Anh yêu em!</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <h1>Do you love me???</h1>
+    <h1 class="animate__animated animate__heartBeat animate__infinite">Do you love me???</h1>
     
     <div class="buttons-container">
-        <button id="yesButton">Yes</button>
+        <button id="yesButton" class="animate__animated animate__pulse animate__infinite">Yes</button>
         <button id="noButton">No</button>
     </div>
     
     <div id="message"></div>
+    
+    <div id="countdown" style="display: none; font-size: 24px; margin-top: 20px; color: #e91e63; background-color: rgba(255, 255, 255, 0.7); padding: 10px; border-radius: 10px;">
+        Hôm nay là ngày của em! ❤️ <span id="timer"></span>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdnjs.cloudflare.com/public/bgsound.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <script src="script.js"></script>
 </body>
