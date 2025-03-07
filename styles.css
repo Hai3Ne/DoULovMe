@@ -1,0 +1,90 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffebee;
+    background-image: url('/api/placeholder/800/600');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+h1 {
+    color: #e91e63;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: heartbeat 1.5s infinite;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px 30px;
+    border-radius: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 40px;
+    position: relative;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+#yesButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#noButton {
+    background-color: #f44336;
+    color: white;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+#yesButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#message {
+    font-size: 2rem;
+    color: #e91e63;
+    margin-top: 50px;
+    text-align: center;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.heart {
+    position: absolute;
+    font-size: 1.5rem;
+    color: #e91e63;
+    animation: float 3s infinite;
+    display: none;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
