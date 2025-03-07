@@ -25,10 +25,13 @@ h1 {
     border-radius: 20px;
 }
 
-.buttons {
+.buttons-container {
     display: flex;
-    gap: 40px;
+    justify-content: center;
+    width: 100%;
     position: relative;
+    height: 60px; /* Đủ cao để chứa các nút */
+    margin: 20px 0;
 }
 
 button {
@@ -39,19 +42,20 @@ button {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
 }
 
 #yesButton {
     background-color: #4CAF50;
     color: white;
+    position: absolute;
+    left: calc(50% - 120px); /* Điều chỉnh vị trí để tạo khoảng cách với nút No */
 }
 
 #noButton {
     background-color: #f44336;
     color: white;
-    position: relative;
-    transition: all 0.5s ease;
+    position: absolute;
+    left: calc(50% + 20px); /* Điều chỉnh vị trí để tạo khoảng cách với nút Yes */
 }
 
 #yesButton:hover {

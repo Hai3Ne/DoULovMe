@@ -6,13 +6,7 @@ const body = document.body;
 let currentX = 0;
 let currentY = 0;
 
-window.addEventListener('load', function() {
-    noButton.style.position = 'static';
-    
-    const buttonRect = noButton.getBoundingClientRect();
-    currentX = buttonRect.left;
-    currentY = buttonRect.top;
-});
+noButton.style.transition = 'all 0.5s ease';
 
 noButton.addEventListener('mouseover', function() {
     const viewportWidth = window.innerWidth;
@@ -24,7 +18,9 @@ noButton.addEventListener('mouseover', function() {
     const buttonRect = noButton.getBoundingClientRect();
     currentX = buttonRect.left;
     currentY = buttonRect.top;
+    
     const safetyMargin = 50;
+    
     const maxX = viewportWidth - buttonWidth - safetyMargin;
     const maxY = viewportHeight - buttonHeight - safetyMargin;
     
@@ -40,10 +36,9 @@ noButton.addEventListener('mouseover', function() {
         
         distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
         attempts++;
-    
         if (attempts > maxAttempts) break;
     } while (distance < minDistance);
-    
+
     noButton.style.position = 'fixed';
     noButton.style.left = newX + 'px';
     noButton.style.top = newY + 'px';
