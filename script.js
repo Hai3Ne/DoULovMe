@@ -24,11 +24,7 @@ noButton.addEventListener('mouseover', function() {
     const buttonRect = noButton.getBoundingClientRect();
     currentX = buttonRect.left;
     currentY = buttonRect.top;
-    
-    // Đảm bảo khoảng cách từ viền màn hình
     const safetyMargin = 50;
-    
-    // Giới hạn vị trí mới trong phạm vi an toàn của màn hình
     const maxX = viewportWidth - buttonWidth - safetyMargin;
     const maxY = viewportHeight - buttonHeight - safetyMargin;
     
@@ -39,19 +35,16 @@ noButton.addEventListener('mouseover', function() {
     const maxAttempts = 50;
     
     do {
-        // Tính toán vị trí mới hoàn toàn nằm trong màn hình
         newX = Math.max(safetyMargin, Math.min(maxX, Math.random() * maxX));
         newY = Math.max(safetyMargin, Math.min(maxY, Math.random() * maxY));
         
         distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
         attempts++;
-        
-        // Tránh vòng lặp vô hạn nếu không thể tìm thấy vị trí thỏa mãn
+    
         if (attempts > maxAttempts) break;
     } while (distance < minDistance);
     
-    // Áp dụng vị trí mới
-    noButton.style.position = 'fixed'; // Sử dụng fixed thay vì absolute
+    noButton.style.position = 'fixed';
     noButton.style.left = newX + 'px';
     noButton.style.top = newY + 'px';
     
@@ -63,7 +56,7 @@ yesButton.addEventListener('click', function() {
     noButton.style.display = 'none';
     yesButton.style.display = 'none';
     message.style.display = 'block';
-    message.innerHTML = 'Anh biết mà! ❤️<br>Anh cũng yêu em nhiều lắm!<br><img src="/api/placeholder/300/200" alt="love image" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">';
+    message.innerHTML = 'Anh biết mà! ❤️<br>Anh cũng yêu em nhiều lắm!<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">';
     
     createHearts();
 });
