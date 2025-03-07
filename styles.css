@@ -95,8 +95,6 @@ button {
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
-
-/* Hiệu ứng pháo hoa */
 .firework {
     position: absolute;
     z-index: 999;
@@ -107,21 +105,40 @@ button {
     border-radius: 50%;
     transform-origin: center;
 }
-
-/* Hiệu ứng lấp lánh cho nút Yes */
 @keyframes sparkle {
     0% { box-shadow: 0 0 5px #4CAF50; }
     50% { box-shadow: 0 0 20px #8BC34A, 0 0 30px #CDDC39; }
     100% { box-shadow: 0 0 5px #4CAF50; }
 }
 
-/* Hiệu ứng xuất hiện dần dần */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hiệu ứng shine cho nút Yes */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+.hint-popup {
+    cursor: default;
+    max-width: 300px;
+}
+
+.hint-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-content p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #e91e63;
+}
+
 #yesButton:after {
     content: '';
     position: absolute;

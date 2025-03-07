@@ -9,6 +9,9 @@ bgMusic.loop = true;
 
 let currentX = 0;
 let currentY = 0;
+let noButtonHoverCount = 0;
+const hintThreshold = 5; 
+let hintShown = false;
 
 noButton.style.transition = 'all 0.5s ease';
 
@@ -26,6 +29,12 @@ yesButton.addEventListener('mouseout', function() {
 });
 
 noButton.addEventListener('mouseover', function() {
+    noButtonHoverCount++;
+    if (noButtonHoverCount >= hintThreshold && !hintShown) {
+        showHint();
+        hintShown = true;
+    }
+    
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
@@ -64,7 +73,6 @@ noButton.addEventListener('mouseover', function() {
     noButton.style.transform = `rotate(${rotation}deg)`;
 });
 
-// Những lời chúc mừng tình yêu ngọt ngào
 const sweetMessages = [
     "Anh biết mà! ❤️<br>Anh cũng yêu em nhiều lắm!",
     "Em là điều tuyệt vời nhất đã đến với anh! ❤️",
@@ -78,15 +86,12 @@ yesButton.addEventListener('click', function() {
     yesButton.style.display = 'none';
     body.style.backgroundImage = "url('/api/placeholder/800/600')";
     body.style.transition = "all 2s ease";
-    
     message.style.display = 'block';
-
     const randomMessage = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
     message.innerHTML = `${randomMessage}<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">`;
-    
+
     createHearts();
     createFireworks();
-    
     let messageIndex = 0;
     setInterval(() => {
         messageIndex = (messageIndex + 1) % sweetMessages.length;
@@ -114,8 +119,53 @@ function createHearts() {
         }, 3000);
     }, 300);
 }
+function showHint() {
+    const hintElement = document.createElement('div');
+    hintElement.id = 'noButtonHint';
+    hintElement.classList.add('hint-popup');
+    
+    const hintMessages = [
+        "Êi Êi bỏ cái tay gaaa nút No coi? 😒😒😒",
+        "Lì dữ hen, nhấn Yes đi em! 💖💖💖",
+        "Anh biết em muốn nhấn Yes mà! 😉",
+        "Quơiiiii, em yêu anh mà, phải không? ❤️",
+        "Ngoan cố à bé! Nhấn Yes đi! 😍"
+    ];
+    
+    const randomMessage = hintMessages[Math.floor(Math.random() * hintMessages.length)];
+    
+    hintElement.innerHTML = `
+        <div class="hint-content">
+            <p>${randomMessage}</p>
+            <img src="/images/angry-cat.jpg" alt="hint image" style="width: 150px; border-radius: 10px;">
+        </div>
+    `;
+    
+    document.body.appendChild(hintElement);
 
-// Tạo hiệu ứng pháo hoa
+    hintElement.style.position = 'fixed';
+    hintElement.style.top = '30%';
+    hintElement.style.left = '50%';
+    hintElement.style.transform = 'translate(-50%, -50%)';
+    hintElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+    hintElement.style.padding = '20px';
+    hintElement.style.borderRadius = '15px';
+    hintElement.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+    hintElement.style.zIndex = '1000';
+    hintElement.style.textAlign = 'center';
+    hintElement.style.color = '#e91e63';
+    hintElement.style.fontSize = '18px';
+    hintElement.style.fontWeight = 'bold';
+    hintElement.style.animation = 'fadeIn 0.5s ease';
+    setTimeout(() => {
+        hintElement.style.animation = 'fadeOut 0.5s ease';
+        setTimeout(() => {
+            hintElement.remove();
+            hintShown = false;
+        }, 500);
+    }, 3000);
+}
+
 function createFireworks() {
     for (let i = 0; i < 5; i++) {
         setTimeout(() => {
@@ -128,8 +178,6 @@ function createFireworks() {
             firework.style.left = x + 'px';
             firework.style.top = y + 'px';
             body.appendChild(firework);
-            
-            // Tạo tia pháo hoa
             for (let j = 0; j < 20; j++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -144,8 +192,6 @@ function createFireworks() {
                 particle.style.height = `${size}px`;
                 
                 firework.appendChild(particle);
-                
-                // Animation for particles
                 const animation = particle.animate([
                     { transform: 'translate(0, 0)', opacity: 1 },
                     { transform: `translate(${Math.cos(angle) * 100 * speed}px, ${Math.sin(angle) * 100 * speed}px)`, opacity: 0 }
