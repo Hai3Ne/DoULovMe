@@ -30,7 +30,7 @@ h1 {
     justify-content: center;
     width: 100%;
     position: relative;
-    height: 60px; /* Đủ cao để chứa các nút */
+    height: 60px;
     margin: 20px 0;
 }
 
@@ -48,14 +48,14 @@ button {
     background-color: #4CAF50;
     color: white;
     position: absolute;
-    left: calc(50% - 120px); /* Điều chỉnh vị trí để tạo khoảng cách với nút No */
+    left: calc(50% - 120px);
 }
 
 #noButton {
     background-color: #f44336;
     color: white;
     position: absolute;
-    left: calc(50% + 20px); /* Điều chỉnh vị trí để tạo khoảng cách với nút Yes */
+    left: calc(50% + 20px);
 }
 
 #yesButton:hover {
