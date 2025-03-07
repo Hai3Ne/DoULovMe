@@ -3,19 +3,19 @@ const yesButton = document.getElementById('yesButton');
 const message = document.getElementById('message');
 const body = document.body;
 
-// Thêm âm thanh
 const bgMusic = new Audio('https://cdnjs.cloudflare.com/ajax/libs/SoundJS/1.0.1/soundjs.min.js');
 bgMusic.loop = true;
 
 let currentX = 0;
 let currentY = 0;
-let noButtonHoverCount = 0;
-const hintThreshold = 5; 
+let noButtonHoverCount = 0; 
+const hintThreshold = 3;
 let hintShown = false;
+const selfieThreshold = 5;
+let selfieTaken = false;
 
 noButton.style.transition = 'all 0.5s ease';
 
-// Hiệu ứng cho nút "Yes"
 yesButton.addEventListener('mouseover', function() {
     yesButton.style.transform = 'scale(1.2)';
     yesButton.style.boxShadow = '0 0 20px #4CAF50';
@@ -30,6 +30,16 @@ yesButton.addEventListener('mouseout', function() {
 
 noButton.addEventListener('mouseover', function() {
     noButtonHoverCount++;
+    
+    if (noButtonHoverCount >= selfieThreshold && !selfieTaken && !hintShown) {
+        selfieTaken = true;
+        createFlashEffect();
+        
+        setTimeout(() => {
+            showFakeSelfie();
+        }, 500);
+    }
+    
     if (noButtonHoverCount >= hintThreshold && !hintShown) {
         showHint();
         hintShown = true;
@@ -74,30 +84,100 @@ noButton.addEventListener('mouseover', function() {
 });
 
 const sweetMessages = [
-    "Anh biết mà! ❤️<br>Anh cũng yêu em nhiều lắm!",
-    "Em là điều tuyệt vời nhất đã đến với anh! ❤️",
-    "Cảm ơn em đã là một người vợ tuyệt vời! ❤️",
-    "Mỗi ngày bên em là một ngày hạnh phúc! ❤️",
-    "Anh yêu em nhiều hơn những ngôi sao trên bầu trời! ❤️"
+    "Anh biết mà! ❤️<br>Anh cũng yêu em nhiều lắm! Chúc em 8/3 hạnh phúc!",
+    "Gửi đến người phụ nữ tuyệt vời nhất trong cuộc đời anh! Chúc em ngày 8/3 tràn ngập niềm vui! ❤️",
+    "Cảm ơn em đã là một người vợ tuyệt vời! Chúc em ngày Quốc tế Phụ nữ thật hạnh phúc! ❤️",
+    "Ngày 8/3 ý nghĩa - Người phụ nữ anh yêu nhất trên đời! ❤️",
+    "Mỗi ngày bên em là một ngày hạnh phúc! Chúc em 8/3 thật nhiều niềm vui và điều ước trở thành hiện thực! ❤️"
 ];
 
 yesButton.addEventListener('click', function() {
     noButton.style.display = 'none';
     yesButton.style.display = 'none';
+    
+    const heading = document.querySelector('h1');
+    heading.innerHTML = "Em Là Tình Yêu Của Đời Anh! ❤️";
+    heading.classList.remove('animate__heartBeat');
+    heading.classList.add('animate__bounceIn');
+    heading.style.color = '#ff4081';
+    heading.style.fontSize = '3.5rem';
+
+    createTitleHearts(heading);
+
     body.style.backgroundImage = "url('/api/placeholder/800/600')";
     body.style.transition = "all 2s ease";
+    
     message.style.display = 'block';
+    
     const randomMessage = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
     message.innerHTML = `${randomMessage}<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">`;
-
+    
+    showWomenDaySpecial();
+    
     createHearts();
     createFireworks();
+    
     let messageIndex = 0;
     setInterval(() => {
         messageIndex = (messageIndex + 1) % sweetMessages.length;
         message.innerHTML = `${sweetMessages[messageIndex]}<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">`;
     }, 5000);
 });
+
+function showWomenDaySpecial() {
+    createFlowers();
+    
+    const specialMessage = document.createElement('div');
+    specialMessage.classList.add('special-message');
+    specialMessage.innerHTML = `
+        <div class="women-day-special">
+            <h2>Chúc Mừng Ngày 8/3!</h2>
+            <p>Gửi đến người phụ nữ tuyệt vời nhất - vợ yêu của anh</p>
+            <div class="flower-decoration">🌹💐🌷🌸</div>
+        </div>
+    `;
+    body.appendChild(specialMessage);
+    
+    setTimeout(() => {
+        specialMessage.style.opacity = "1";
+        specialMessage.style.transform = "translateY(0)";
+    }, 500);
+    
+    setTimeout(() => {
+        specialMessage.style.opacity = "0";
+        specialMessage.style.transform = "translateY(-20px)";
+        setTimeout(() => {
+            specialMessage.remove();
+        }, 1000);
+    }, 5000);
+}
+
+function createFlowers() {
+    const flowers = ['🌹', '🌷', '🌸', '🌺', '🌻', '🌼'];
+    
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            
+            const x = Math.random() * window.innerWidth;
+            const delay = Math.random() * 5;
+            const size = Math.random() * 20 + 20;
+            
+            flower.style.left = x + 'px';
+            flower.style.top = window.innerHeight + 'px';
+            flower.style.animationDelay = delay + 's';
+            flower.style.fontSize = size + 'px';
+            
+            body.appendChild(flower);
+            
+            setTimeout(() => {
+                flower.remove();
+            }, 10000);
+        }, i * 300);
+    }
+}
 
 function createHearts() {
     setInterval(() => {
@@ -119,17 +199,18 @@ function createHearts() {
         }, 3000);
     }, 300);
 }
+
 function showHint() {
     const hintElement = document.createElement('div');
     hintElement.id = 'noButtonHint';
     hintElement.classList.add('hint-popup');
     
     const hintMessages = [
-        "Êi Êi bỏ cái tay gaaa nút No coi? 😒😒😒",
-        "Lì dữ hen, nhấn Yes đi em! 💖💖💖",
-        "Anh biết em muốn nhấn Yes mà! 😉",
-        "Quơiiiii, em yêu anh mà, phải không? ❤️",
-        "Ngoan cố à bé! Nhấn Yes đi! 😍"
+        "Em nỡ lòng nào từ chối tình yêu của anh vào ngày 8/3 sao? 😢",
+        "Đừng ngoan cố nữa, nhấn Yes đi em! Hôm nay là ngày của em mà! 💖",
+        "Anh đã chuẩn bị quà 8/3 rồi, chỉ cần em nhấn Yes! 😉",
+        "Thôi nào, đừng làm khó anh vào ngày đặc biệt thế này! ❤️",
+        "Hãy cho anh cơ hội được yêu thương và chăm sóc em vào ngày 8/3 này! 😍"
     ];
     
     const randomMessage = hintMessages[Math.floor(Math.random() * hintMessages.length)];
@@ -142,21 +223,38 @@ function showHint() {
     `;
     
     document.body.appendChild(hintElement);
-
+    
     hintElement.style.position = 'fixed';
-    hintElement.style.top = '30%';
-    hintElement.style.left = '50%';
-    hintElement.style.transform = 'translate(-50%, -50%)';
+    hintElement.style.top = '80px'; 
+    hintElement.style.right = '20px';
+    hintElement.style.transform = 'none';
     hintElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-    hintElement.style.padding = '20px';
+    hintElement.style.padding = '15px';
     hintElement.style.borderRadius = '15px';
     hintElement.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
     hintElement.style.zIndex = '1000';
     hintElement.style.textAlign = 'center';
     hintElement.style.color = '#e91e63';
-    hintElement.style.fontSize = '18px';
+    hintElement.style.fontSize = '16px';
     hintElement.style.fontWeight = 'bold';
-    hintElement.style.animation = 'fadeIn 0.5s ease';
+    hintElement.style.animation = 'slideInRight 0.5s ease';
+    hintElement.style.maxWidth = '250px'; 
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideOutRight {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(50px); }
+        }
+    `;
+
+    document.head.appendChild(style);
+
     setTimeout(() => {
         hintElement.style.animation = 'fadeOut 0.5s ease';
         setTimeout(() => {
@@ -178,6 +276,7 @@ function createFireworks() {
             firework.style.left = x + 'px';
             firework.style.top = y + 'px';
             body.appendChild(firework);
+            
             for (let j = 0; j < 20; j++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -192,6 +291,7 @@ function createFireworks() {
                 particle.style.height = `${size}px`;
                 
                 firework.appendChild(particle);
+                
                 const animation = particle.animate([
                     { transform: 'translate(0, 0)', opacity: 1 },
                     { transform: `translate(${Math.cos(angle) * 100 * speed}px, ${Math.sin(angle) * 100 * speed}px)`, opacity: 0 }
@@ -208,5 +308,222 @@ function createFireworks() {
             }, 2000);
             
         }, i * 500);
+    }
+}
+function createFlashEffect() {
+    const flash = document.createElement('div');
+    flash.classList.add('camera-flash');
+    
+    document.body.appendChild(flash);
+    
+    setTimeout(() => {
+        flash.style.opacity = '1';
+    }, 10);
+    
+    setTimeout(() => {
+        flash.style.opacity = '0';
+        setTimeout(() => {
+            flash.remove();
+        }, 500);
+    }, 200);
+    
+    const shutterSound = new Audio('data:audio/wav;base64,UklGRl9vT19CAMERA_SHUTTER');
+    shutterSound.volume = 0.5;
+    shutterSound.play().catch(err => console.log('Audio không thể phát:', err));
+}
+
+function showFakeSelfie() {
+    const selfieContainer = document.createElement('div');
+    selfieContainer.classList.add('fake-selfie-container');
+    
+    const funnyExpressions = [
+        "😱",
+        "😳", 
+        "🤔",
+        "🤨", 
+        "😒"
+    ];
+    
+    const funnyTitles = [
+        "Gòi gòi , A chụp lại em không chịu yes gòi!",
+        "QUoiwiiiiiii, đây sẽ là bằng chứng e xa lánh tui!",
+        "Chụp được em rồi nhé! chạy đằng chời nhoaaa?",
+        "Chồng em đã thuê chúng tôi theo dõi em đấy!",
+        "Máy quét tình yêu phát hiện người đang tránh né!"
+    ];
+    
+    const randomExpression = funnyExpressions[Math.floor(Math.random() * funnyExpressions.length)];
+    const randomTitle = funnyTitles[Math.floor(Math.random() * funnyTitles.length)];
+    
+    selfieContainer.innerHTML = `
+        <div class="selfie-header">
+            <span class="camera-icon">📸</span>
+            <span class="selfie-title">${randomTitle}</span>
+            <span class="close-button">×</span>
+        </div>
+        <div class="selfie-content">
+            <div class="selfie-frame">
+                <div class="selfie-expression">${randomExpression}</div>
+                <div class="selfie-caption">Khoảnh khắc em cố né tránh nút "Yes"</div>
+            </div>
+            <div class="selfie-message">Đã chụp được ${noButtonHoverCount} lần em cố tránh bày tỏ tình yêu trong ngày 8/3! 😂</div>
+            <button class="selfie-share-button">Gửi về "máy chủ chồng"</button>
+        </div>
+    `;
+    
+    document.body.appendChild(selfieContainer);
+    
+    setTimeout(() => {
+        selfieContainer.style.transform = 'translateY(0)';
+        selfieContainer.style.opacity = '1';
+    }, 10);
+    
+    const closeButton = selfieContainer.querySelector('.close-button');
+    closeButton.addEventListener('click', () => {
+        selfieContainer.style.transform = 'translateY(20px)';
+        selfieContainer.style.opacity = '0';
+        setTimeout(() => {
+            selfieContainer.remove();
+        }, 300);
+    });
+    
+    const shareButton = selfieContainer.querySelector('.selfie-share-button');
+    shareButton.addEventListener('click', () => {
+        shareButton.innerHTML = 'Đang gửi...';
+        shareButton.disabled = true;
+        shareButton.style.backgroundColor = '#999';
+        
+        setTimeout(() => {
+            showFakeSendingReport();
+            
+            setTimeout(() => {
+                selfieContainer.style.transform = 'translateY(20px)';
+                selfieContainer.style.opacity = '0';
+                setTimeout(() => {
+                    selfieContainer.remove();
+                }, 300);
+            }, 1000);
+        }, 1500);
+    });
+}
+
+function showFakeSendingReport() {
+    const reportContainer = document.createElement('div');
+    reportContainer.classList.add('fake-report-container');
+    
+    reportContainer.innerHTML = `
+        <div class="report-header">
+            <span class="report-icon">📨</span>
+            <span class="report-title">Báo cáo gửi đi</span>
+            <span class="close-button">×</span>
+        </div>
+        <div class="report-content">
+            <div class="loading-animation">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="report-message">Đang gửi về "máy chủ chồng" của em...</div>
+            <div class="report-details">
+                <p>Đã gửi: <span class="sending-status success">✓</span> Hình ảnh né tránh tình yêu</p>
+                <p>Đang gửi: <span class="sending-status pending">⟳</span> Tọa độ vị trí</p>
+                <p>Chờ gửi: <span class="sending-status pending">⌛</span> Biểu cảm khuôn mặt</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(reportContainer);
+    
+    setTimeout(() => {
+        reportContainer.style.transform = 'translateY(0)';
+        reportContainer.style.opacity = '1';
+        
+        setTimeout(() => {
+            const reportMessage = reportContainer.querySelector('.report-message');
+            reportMessage.innerHTML = 'ĐÙAA THÔI! Yên tâm, không ai theo dõi em đâu! 🤣';
+            reportMessage.style.color = '#4CAF50';
+            reportMessage.style.fontWeight = 'bold';
+            reportMessage.style.fontSize = '18px';
+            
+            const sendingStatuses = reportContainer.querySelectorAll('.sending-status');
+            sendingStatuses.forEach(status => {
+                status.innerHTML = '✗';
+                status.classList.remove('success', 'pending');
+                status.classList.add('failed');
+            });
+            
+            const loadingBar = reportContainer.querySelector('.loading-bar');
+            loadingBar.style.animationPlayState = 'paused';
+            loadingBar.style.width = '30%';
+            loadingBar.style.backgroundColor = '#e91e63';
+            
+            setTimeout(() => {
+                alert('Suy cho cùng, tình yêu luôn tìm được cách! Nhấn Yes thôi nào! 💕 Chúc mừng ngày 8/3! 🌹');
+                
+                highlightYesButton();
+                
+                reportContainer.style.transform = 'translateY(20px)';
+                reportContainer.style.opacity = '0';
+                setTimeout(() => {
+                    reportContainer.remove();
+                }, 300);
+            }, 3000);
+        }, 3000);
+    }, 10);
+    
+    const closeButton = reportContainer.querySelector('.close-button');
+    closeButton.addEventListener('click', () => {
+        reportContainer.style.transform = 'translateY(20px)';
+        reportContainer.style.opacity = '0';
+        setTimeout(() => {
+            reportContainer.remove();
+        }, 300);
+    });
+}
+
+function highlightYesButton() {
+    yesButton.style.transform = 'scale(1.5)';
+    yesButton.style.boxShadow = '0 0 30px #4CAF50';
+    yesButton.style.animation = 'super-pulse 1s infinite';
+    
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes super-pulse {
+            0% { transform: scale(1.5); }
+            50% { transform: scale(1.8); }
+            100% { transform: scale(1.5); }
+        }
+    `;
+    document.head.appendChild(style);
+}
+function createTitleHearts(titleElement) {
+    const heartSymbols = ['❤️', '💖', '💕', '💘', '💓'];
+    const heartCount = 8;
+    
+    for (let i = 0; i < heartCount; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('span');
+            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.classList.add('title-heart');
+            
+            const angle = (i / heartCount) * 2 * Math.PI;
+            const distance = 80 + Math.random() * 40;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            
+            heart.style.position = 'absolute';
+            heart.style.fontSize = '1.5rem';
+            heart.style.transform = `translate(${x}px, ${y}px)`;
+            heart.style.opacity = '0';
+            
+            titleElement.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.style.transition = 'all 3s ease-out';
+                heart.style.opacity = '1';
+                heart.style.transform = `translate(${x * 1.5}px, ${y - 100}px)`;
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }, 100);
+        }, i * 300);
     }
 }

@@ -12,6 +12,55 @@ body {
     margin: 0;
     overflow: hidden;
     transition: background-image 3s ease;
+    position: relative;
+}
+
+body::before,
+body::after {
+    content: '🌹';
+    position: fixed;
+    font-size: 50px;
+    z-index: -1;
+    animation: float-rose 10s infinite ease-in-out alternate;
+}
+
+body::before {
+    top: 20px;
+    left: 20px;
+    animation-delay: 0s;
+}
+
+body::after {
+    bottom: 20px;
+    right: 20px;
+    animation-delay: 2s;
+}
+
+@keyframes float-rose {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(30px) rotate(10deg); }
+}
+
+.women-day-badge {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff4081, #e91e63);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    z-index: 100;
+    animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+    100% { transform: translateX(-50%) scale(1); }
 }
 
 h1 {
@@ -95,6 +144,7 @@ button {
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
+
 .firework {
     position: absolute;
     z-index: 999;
@@ -105,6 +155,7 @@ button {
     border-radius: 50%;
     transform-origin: center;
 }
+
 @keyframes sparkle {
     0% { box-shadow: 0 0 5px #4CAF50; }
     50% { box-shadow: 0 0 20px #8BC34A, 0 0 30px #CDDC39; }
@@ -165,4 +216,502 @@ button {
     transition-property: left, top, opacity;
     transition-duration: 0.7s, 0.7s, 0.15s;
     transition-timing-function: ease;
+}
+
+#yesButton:after {
+    content: '';
+    position: absolute;
+    top: -110%;
+    left: -210%;
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(30deg);
+    background: rgba(255, 255, 255, 0.13);
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0.13) 0%,
+        rgba(255, 255, 255, 0.13) 77%,
+        rgba(255, 255, 255, 0.5) 92%,
+        rgba(255, 255, 255, 0.0) 100%
+    );
+}
+
+#yesButton:hover:after {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.15s;
+    transition-timing-function: ease;
+}body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffebee;
+    background-image: url('/api/placeholder/800/600');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    overflow: hidden;
+    transition: background-image 3s ease;
+    position: relative;
+}
+
+/* Hoa hồng trang trí */
+body::before,
+body::after {
+    content: '🌹';
+    position: fixed;
+    font-size: 50px;
+    z-index: -1;
+    animation: float-rose 10s infinite ease-in-out alternate;
+}
+
+body::before {
+    top: 20px;
+    left: 20px;
+    animation-delay: 0s;
+}
+
+body::after {
+    bottom: 20px;
+    right: 20px;
+    animation-delay: 2s;
+}
+
+@keyframes float-rose {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(30px) rotate(10deg); }
+}
+
+.women-day-badge {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff4081, #e91e63);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    z-index: 100;
+    animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+h1 {
+    color: #e91e63;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: heartbeat 1.5s infinite;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px 30px;
+    border-radius: 20px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    height: 60px;
+    margin: 20px 0;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+#yesButton {
+    background-color: #4CAF50;
+    color: white;
+    position: absolute;
+    left: calc(50% - 120px);
+}
+
+#noButton {
+    background-color: #f44336;
+    color: white;
+    position: absolute;
+    left: calc(50% + 20px);
+}
+
+#yesButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#message {
+    font-size: 2rem;
+    color: #e91e63;
+    margin-top: 50px;
+    text-align: center;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    animation: fadeIn 1s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.heart {
+    position: absolute;
+    font-size: 1.5rem;
+    color: #e91e63;
+    animation: float 3s infinite;
+    display: none;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+.firework {
+    position: absolute;
+    z-index: 999;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    transform-origin: center;
+}
+
+@keyframes sparkle {
+    0% { box-shadow: 0 0 5px #4CAF50; }
+    50% { box-shadow: 0 0 20px #8BC34A, 0 0 30px #CDDC39; }
+    100% { box-shadow: 0 0 5px #4CAF50; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+.hint-popup {
+    cursor: default;
+    max-width: 300px;
+}
+
+.hint-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-content p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #e91e63;
+}
+
+.flower {
+    position: absolute;
+    z-index: 10;
+    animation: float-flower 10s linear forwards;
+}
+
+@keyframes float-flower {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+.special-message {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -20px);
+    background: linear-gradient(135deg, #ff80ab, #f50057);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(245, 0, 87, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.8s ease;
+    max-width: 80%;
+}
+
+.women-day-special h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.women-day-special p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.flower-decoration {
+    font-size: 30px;
+    margin-top: 15px;
+    letter-spacing: 10px;
+}
+
+.camera-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    z-index: 999;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.fake-selfie-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.selfie-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #ff4081, #e91e63);
+    color: white;
+}
+
+.camera-icon {
+    font-size: 20px;
+}
+
+.selfie-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.close-button {
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.selfie-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.selfie-frame {
+    width: 100%;
+    height: 200px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 2px dashed #e91e63;
+}
+
+.selfie-expression {
+    font-size: 100px;
+    margin-bottom: 10px;
+    animation: selfie-wobble 2s infinite;
+}
+
+@keyframes selfie-wobble {
+    0% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(-5deg); }
+}
+
+.selfie-caption {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+.selfie-message {
+    font-size: 16px;
+    color: #e91e63;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.selfie-share-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.selfie-share-button:hover {
+    background-color: #388E3C;
+    transform: scale(1.05);
+}
+
+.fake-report-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #2196F3, #3F51B5);
+    color: white;
+}
+
+.report-icon {
+    font-size: 20px;
+}
+
+.report-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.report-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.loading-animation {
+    width: 100%;
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 30%;
+    background-color: #2196F3;
+    border-radius: 5px;
+    animation: loading 2s infinite linear;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
+}
+
+.report-message {
+    font-size: 16px;
+    color: #2196F3;
+    margin-bottom: 20px;
+}
+
+.report-details {
+    text-align: left;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.report-details p {
+    margin: 8px 0;
+}
+
+.sending-status {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+.success {
+    color: #4CAF50;
+}
+
+.pending {
+    color: #FFC107;
+    animation: rotate 1s infinite linear;
+}
+
+.failed {
+    color: #F44336;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes float-title-heart {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+}
+
+.title-heart {
+    position: absolute;
+    animation: float-title-heart 3s forwards;
 }
