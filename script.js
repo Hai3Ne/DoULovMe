@@ -3,7 +3,7 @@ const yesButton = document.getElementById('yesButton');
 const message = document.getElementById('message');
 const body = document.body;
 
-const bgMusic = new Audio('https://cdnjs.cloudflare.com/ajax/libs/SoundJS/1.0.1/soundjs.min.js');
+const bgMusic = document.getElementById('bgMusic');
 bgMusic.loop = true;
 
 let currentX = 0;
@@ -91,6 +91,17 @@ const sweetMessages = [
     "Mỗi ngày bên em là một ngày hạnh phúc! Chúc em 8/3 thật nhiều niềm vui và điều ước trở thành hiện thực! ❤️"
 ];
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Thêm sự kiện click
+    document.body.addEventListener('click', playBackgroundMusic);
+});
+
+function playBackgroundMusic() {
+    if (bgMusic && bgMusic.paused) {
+        bgMusic.play().catch(err => console.log('Không thể phát nhạc:', err));
+    }
+}
+
 yesButton.addEventListener('click', function () {
     noButton.style.display = 'none';
     yesButton.style.display = 'none';
@@ -110,9 +121,9 @@ yesButton.addEventListener('click', function () {
     message.style.display = 'block';
 
     const randomMessage = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
-    message.innerHTML = `${randomMessage}<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">`;
+    message.innerHTML = `${randomMessage}<br><img src="images/love.jpg" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); width: 300px; max-width: 100%;">`;
 
-    showWomenDaySpecial();
+    // showWomenDaySpecial();
 
     createHearts();
     createFireworks();
@@ -120,7 +131,7 @@ yesButton.addEventListener('click', function () {
     let messageIndex = 0;
     setInterval(() => {
         messageIndex = (messageIndex + 1) % sweetMessages.length;
-        message.innerHTML = `${sweetMessages[messageIndex]}<br><img src="images/cuteee.gif" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">`;
+        message.innerHTML = `${sweetMessages[messageIndex]}<br><img src="images/love.jpg" alt="love gif" style="border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); width: 300px; max-width: 100%;">`;
     }, 5000);
 });
 
